@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IM Agent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1a1a1a;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff0000;
+        }
+
+        .lang-switch {
+            background: #1a1a1a;
+            border: 1px solid #ff0000;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .lang-switch:hover {
+            background: #ff0000;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #ff0000 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #999;
+            margin-bottom: 2rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: #1a1a1a;
+            border: 1px solid #ff0000;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ff0000;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .module-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff0000 0%, transparent 100%);
+        }
+
+        .module-card:hover {
+            border-color: #ff0000;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
+        }
+
+        .module-icon {
+            width: 60px;
+            height: 60px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .module-card p {
+            color: #999;
+            line-height: 1.8;
+        }
+
+        .footer {
+            background: #0a0a0a;
+            border-top: 1px solid #1a1a1a;
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">IM Agent</div>
+            <button class="lang-switch" onclick="toggleLang()">
+                <span id="lang-btn">EN</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1 id="hero-title">ima.gent</h1>
+        <p id="hero-desc">关注AI 硬件｜本地化 LLM｜多模态模型应用</p>
+        <div class="status-badge" id="status-badge">🚧 开发中</div>
+    </section>
+
+    <div class="container">
+        <div class="modules-grid">
+            <div class="module-card">
+                <div class="module-icon">🖥️</div>
+                <h3 id="module1-title">AI 硬件</h3>
+                <p id="module1-desc">高性能 AI 加速器和专用硬件解决方案，为深度学习和推理任务提供强大算力支持。优化的硬件架构确保最佳性能表现。</p>
+            </div>
+
+            <div class="module-card">
+                <div class="module-icon">🤖</div>
+                <h3 id="module2-title">开源 LLM</h3>
+                <p id="module2-desc">基于最新开源大语言模型，提供灵活可定制的 AI 能力。支持主流模型架构，助力快速构建智能应用。</p>
+            </div>
+
+            <div class="module-card">
+                <div class="module-icon">🔧</div>
+                <h3 id="module3-title">本地部署</h3>
+                <p id="module3-desc">完整的本地化部署方案，保障数据隐私与安全。支持私有云和边缘计算环境，满足企业级应用需求。</p>
+            </div>
+
+            <div class="module-card">
+                <div class="module-icon">💡</div>
+                <h3 id="module4-title">应用场景</h3>
+                <p id="module4-desc">覆盖智能客服、内容生成、数据分析等多个领域。提供行业定制化解决方案，加速 AI 技术落地应用。</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p id="footer-text">© 2024 AI Platform. 保留所有权利。</p>
+    </footer>
+
+    <script>
+        let isEN = false;
+
+        const translations = {
+            zh: {
+                langBtn: 'EN',
+                heroTitle: 'ima.gent',
+                heroDesc: '关注AI 硬件｜本地化 LLM｜多模态模型应用',
+                statusBadge: '🚧 开发中',
+                module1Title: 'AI 硬件',
+                module1Desc: '高性能 AI 加速器和专用硬件解决方案，为深度学习和推理任务提供强大算力支持。优化的硬件架构确保最佳性能表现。',
+                module2Title: '开源 LLM',
+                module2Desc: '基于最新开源大语言模型，提供灵活可定制的 AI 能力。支持主流模型架构，助力快速构建智能应用。',
+                module3Title: '本地部署',
+                module3Desc: '完整的本地化部署方案，保障数据隐私与安全。支持私有云和边缘计算环境，满足企业级应用需求。',
+                module4Title: '应用场景',
+                module4Desc: '覆盖智能客服、内容生成、数据分析等多个领域。提供行业定制化解决方案，加速 AI 技术落地应用。',
+                footerText: '© 2025 IM Agent. 保留所有权利。'
+            },
+            en: {
+                langBtn: '中文',
+                heroTitle: 'ima.gent',
+                heroDesc: 'Powerful artificial intelligence at your fingertips',
+                statusBadge: '🚧 In Development',
+                module1Title: 'AI Hardware',
+                module1Desc: 'High-performance AI accelerators and dedicated hardware solutions providing robust computing power for deep learning and inference tasks. Optimized architecture ensures peak performance.',
+                module2Title: 'Open Source LLM',
+                module2Desc: 'Built on cutting-edge open-source large language models, offering flexible and customizable AI capabilities. Supporting mainstream model architectures for rapid intelligent application development.',
+                module3Title: 'Local Deployment',
+                module3Desc: 'Complete on-premises deployment solutions ensuring data privacy and security. Supporting private cloud and edge computing environments for enterprise-grade applications.',
+                module4Title: 'Use Cases',
+                module4Desc: 'Covering intelligent customer service, content generation, data analysis and more. Providing industry-specific solutions to accelerate AI technology adoption.',
+                footerText: '© 2024 AI Platform. All rights reserved.'
+            }
+        };
+
+        function toggleLang() {
+            isEN = !isEN;
+            const lang = isEN ? 'en' : 'zh';
+            const t = translations[lang];
+
+            document.getElementById('lang-btn').textContent = t.langBtn;
+            document.getElementById('hero-title').textContent = t.heroTitle;
+            document.getElementById('hero-desc').textContent = t.heroDesc;
+            document.getElementById('status-badge').textContent = t.statusBadge;
+            document.getElementById('module1-title').textContent = t.module1Title;
+            document.getElementById('module1-desc').textContent = t.module1Desc;
+            document.getElementById('module2-title').textContent = t.module2Title;
+            document.getElementById('module2-desc').textContent = t.module2Desc;
+            document.getElementById('module3-title').textContent = t.module3Title;
+            document.getElementById('module3-desc').textContent = t.module3Desc;
+            document.getElementById('module4-title').textContent = t.module4Title;
+            document.getElementById('module4-desc').textContent = t.module4Desc;
+            document.getElementById('footer-text').textContent = t.footerText;
+        }
+    </script>
+</body>
+</html>
